@@ -108,14 +108,13 @@ class CatDetailVC: UIViewController {
     }
     
     @IBAction func btnSelected(_ sender: UIButton!) {
-        if sender.title(for: .selected)! == question! {
-            bingoView.isHidden = false
+        if sender.title(for: .normal)! == question! {
+            bingoView.isHidden = true
             bingoimg.isHidden = false
             isWinMode = true
             print(question!)
             print(sender.title(for: .selected)!)
-            print(bingoView.isHidden)
-            print(bingoimg.isHidden)
+
         }
     }
     
