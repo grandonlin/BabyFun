@@ -11,15 +11,9 @@ import Foundation
 class Category {
     
     private var _name: String!
-    private var _title: String!
-    var number = 12
     
     var name: String {
         return _name
-    }
-    
-    var title: String {
-        return _title
     }
     
     init(name: String) {

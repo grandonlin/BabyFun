@@ -73,9 +73,7 @@ class CatDetailVC: UIViewController {
         } else if category.name == "transportation" {
             selectionArray = transportation
         }
-        selectionArray.shuffle()
-        print(selectionArray)
-        
+        selectionArray.shuffle()        
     }
     
     func assignPhoto(array: [String]) {
