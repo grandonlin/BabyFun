@@ -25,12 +25,14 @@ class CatDetailVC: UIViewController {
     @IBOutlet weak var btnTwelve: UIButton!
     @IBOutlet weak var bingoimg: UIImageView!
     @IBOutlet weak var bingoView: UIView!
+    @IBOutlet weak var againImg: UIImageView!
+    @IBOutlet weak var yesBtn: UIButton!
+    @IBOutlet weak var noBtn: UIButton!
 
     
     var category: Category!
     var selectionArray: Array<String>!
     var question: String!
-    var isWinMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,21 +106,48 @@ class CatDetailVC: UIViewController {
         btnTen.setTitle(array[9], for: .normal)
         btnEleven.setTitle(array[10], for: .normal)
         btnTwelve.setTitle(array[11], for: .normal)
-        print(btnTwelve.title(for: .normal)!)
     }
     
     @IBAction func btnSelected(_ sender: UIButton!) {
         if sender.title(for: .selected)! == question! {
-            bingoView.isHidden = false
-            bingoimg.isHidden = false
-            isWinMode = true
-            print(question!)
-            print(sender.title(for: .selected)!)
-            print(bingoView.isHidden)
-            print(bingoimg.isHidden)
+            showView()
+        } else {
+            questionLbl.text = "Nope! Which one is \(question!)?"
         }
     }
     
+    @IBAction func againBtnPressed(_ sender: UIButton!) {
+        if sender.title(for: .normal) == "yes" {
+            self.hideView()
+            self.initArr()
+            self.question(array: selectionArray)
+            self.assignPhoto(array: selectionArray)
+            self.assignTitle(array: selectionArray)
+        }
+        if sender.title(for: .normal) == "no" {
+            self.hideView()
+            for x in 0...selectionArray.count {
+                self.view.viewWithTag(x)?.isUserInteractionEnabled = false
+            }
+            questionLbl.text = "Please go back to choose another game."
+        }
+    }
+    
+    func hideView() {
+        bingoView.isHidden = true
+        bingoimg.isHidden = true
+        againImg.isHidden = true
+        yesBtn.isHidden = true
+        noBtn.isHidden = true
+    }
+    
+    func showView() {
+        bingoView.isHidden = false
+        bingoimg.isHidden = false
+        againImg.isHidden = false
+        yesBtn.isHidden = false
+        noBtn.isHidden = false
+    }
  
 //    func showBingo() {
 ////        if isWinMode {
