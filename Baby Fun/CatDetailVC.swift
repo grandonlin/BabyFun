@@ -30,7 +30,6 @@ class CatDetailVC: UIViewController {
     var category: Category!
     var selectionArray: Array<String>!
     var question: String!
-    var isWinMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,16 +108,31 @@ class CatDetailVC: UIViewController {
     
     @IBAction func btnSelected(_ sender: UIButton!) {
         if sender.title(for: .normal)! == question! {
-            bingoView.isHidden = true
-            bingoimg.isHidden = false
-            isWinMode = true
+            bingoView.isHidden = false
+            //bingoimg.isHidden = false
             print(question!)
             print(sender.title(for: .selected)!)
 
+        } else {
+            questionLbl.text = "Nope! Try again! Which one is \(question!)?"
         }
     }
     
+    @IBAction func yesBtnPressed(_ sender: UIButton) {
+        bingoView.isHidden = true
+        self.initArr()
+        self.question(array: selectionArray)
+        self.assignPhoto(array: selectionArray)
+        self.assignTitle(array: selectionArray)
+
+    }
  
+    @IBAction func noBtnPressed(_ sender: UIButton) {
+        bingoView.isHidden = true
+        for x in 0..<selectionArray.count {
+            self.view.viewWithTag(x)?.isUserInteractionEnabled = false
+        }
+    }
 //    func showBingo() {
 ////        if isWinMode {
 //            for x in 0..<selectionArray.count {
